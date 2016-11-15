@@ -29,6 +29,7 @@ public class BulletCollide : NetworkBehaviour
         // Start timer to destroy
         Invoke("DestroyMe", lifeTime);
 
+        // Call Datalogger to add bullet
         GameObject dataloggerTest = GameObject.FindGameObjectWithTag("DataLogger");
 
         if (dataloggerTest)
@@ -51,6 +52,10 @@ public class BulletCollide : NetworkBehaviour
         if (!isServer)
             return;
 
+        // Don't hit the weapon. This is a stylistic choice. If desired, this can be modified
+        // such that the player/enemy recieves damage when their weapon is hit, but then there
+        // needs to be a way to handle it so that the player/enemy does not hit themselves when
+        // they fire.
         if (collision.gameObject.CompareTag("Weapon"))
             return;
 
@@ -67,7 +72,10 @@ public class BulletCollide : NetworkBehaviour
         /*
         else if (collision.gameObject.CompareTag("Player"))
         {
-            // Game Over Routine???
+            Game Over Routine???
+            Currently, it is set such that whenever either player is hit, that marks as a loss for that
+            round. The handling for that could be changed so that it is moved here instead of in the 
+            datalogger, which is where it is now. 
         }
         */
 

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// Old BadGuy spawner by Joe. Replaced by EnemySpawner
+
+using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;

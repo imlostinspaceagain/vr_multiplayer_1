@@ -1,11 +1,31 @@
-﻿using UnityEngine;
+﻿/* Original Code from SteamVR Essentials
+ * Purpose: Handle health for players and enemies
+ * 
+ * Modifications made by Mohammad Alam
+ *  - Added an image that spawns in front of the player to signify that they got damaged
+ *      - This required taking out the old text health information
+ *      - This can still work with the old character, but their health text will not change.
+ *  - The image is added by the PlayerController or VRPlayerController.
+ *      - If there is no image, the method does not happen.
+ *  - GetAncestor Function seemed to make things worse for the respawn call, so it has been commented out
+ *      - The respawn method was only useful for the PlayerController, but since the players here
+ *          do not need to respawn, because loss counts as a stat rather than "death", it is not needed
+ *      - Also, when the respawn happened, the spawn location was not correct. This is due to the 
+ *          controller spawn being offset from VR spawnpoint.
+ *      
+ * Currently, health does not really have too much of a purpose other than a method to show that
+ * the player got hit. This is because round loss or enemy KO is not dependent of going to 0 Hp. 
+ * The implementation could easily be changed so that there is no health and the only purpose is
+ * to let the player know that they got damaged, but it's not too costly to keep it here and it 
+ * could become useful.
+ */
+
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class Health : NetworkBehaviour 
 {
-    // Script from SteamVR Network Essentials
-
 	public const int maxHealth = 100;
 	public bool destroyOnDeath;
     public Image damageImage;

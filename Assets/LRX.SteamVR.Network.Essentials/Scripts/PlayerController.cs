@@ -12,6 +12,7 @@
  *  - There are frequent Get calls that have been optimized by adding variables
  *  - Datalogger Connection added
  *      - Sends Player Name and Transform for DataLogging
+ *  - Input for Gunfire was originally Space and has now been changed to left-click
  */
 
 // Note: When incorporating new character models here, either edit code accordingly,
@@ -30,7 +31,7 @@ public class PlayerController : NetworkBehaviour
 	public GameObject bulletPrefab;
 	private MouseLook mouseLook;
 	public Transform bulletSpawn;
-    public float speed;
+    public float speed = 2f;
 
     // New Variables
     // For GunArm Position Fixing
@@ -39,7 +40,8 @@ public class PlayerController : NetworkBehaviour
     private Camera mainCam;
     private Transform GunArm;
     // For Sound
-    public AudioSource audioSrc;
+    private AudioSource audioSrc;
+
     public override void OnStartLocalPlayer()
 	{
         // Initialize
@@ -111,7 +113,7 @@ public class PlayerController : NetworkBehaviour
         // transform.rotation = Camera.main.transform.rotation;
 
         // common input here
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
 			CmdFire();
 		}
